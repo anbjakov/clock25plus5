@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+import { Container } from "@chakra-ui/react";
+import { Text, Grid, GridItem } from "@chakra-ui/react";
+import Timer from "./components/Timer";
+import BreakControls from "./components/BreakControls";
+import SessionControls from "./components/SessionControls";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      <Container>
+        <Grid
+          h="200px"
+          templateRows="repeat(2, 1fr)"
+          templateColumns="repeat(5, 1fr)"
+          gap={4}
         >
-          Learn React
-        </a>
-      </header>
+          <GridItem colSpan={4}>
+            <Text fontSize="3xl" color={"blue.600"} align="center">
+              25 + 5 Clock
+            </Text>
+          </GridItem>
+          <GridItem colSpan={2}>
+            <BreakControls />
+          </GridItem>
+          <GridItem colSpan={2}>
+            <SessionControls />
+          </GridItem>
+          <GridItem colSpan={4}>
+            <Timer />
+          </GridItem>
+        </Grid>
+      </Container>
     </div>
   );
 }
