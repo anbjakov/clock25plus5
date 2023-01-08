@@ -16,10 +16,7 @@ const Timer = () => {
   const [isPause, setPause] = useState(false);
   const [timerTime, setTimerTime] = useState(DEFAULT_SESSION * 60000);
   const [isTimerStarted, setTimerStart] = useState(false);
-  const [isAlert, setAlert] = useState({
-    beep: false,
-    rewind: false,
-  });
+
   useEffect(() => {
     setTimerTime(sessionDuration * 60000);
   }, [sessionDuration]);
@@ -35,12 +32,9 @@ const Timer = () => {
 
   useEffect(() => {
     if (isTimerStarted) {
-      setAlert({ ...isAlert, beep: false });
-
       let timerCountDownInt = setInterval(() => {
         setTimerTime((prevTime) => (prevTime > 0 ? prevTime - 1000 : 0));
         if (timerTime === 0) {
-          setAlert({ ...isAlert, beep: true });
           audioElement.current?.play();
           setBreak(!isBreak);
           setSession(!isSession);
@@ -77,12 +71,8 @@ const Timer = () => {
     audioElement.current?.pause();
     if (audioElement.current) audioElement.current.currentTime = 0;
 
-    setAlert({
-      ...isAlert,
-      rewind: !isAlert.rewind,
-    });
     setTimerTime(DEFAULT_SESSION * 60000);
-  }, [isAlert]);
+  }, []);
   return (
     <>
       <Container
